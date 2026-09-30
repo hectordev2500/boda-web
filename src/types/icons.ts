@@ -1,0 +1,12 @@
+export type IconName =
+  | 'camera'
+  | 'music'
+  | 'bowtie'
+  | 'clipboard'
+  | 'gift'
+  | 'checklist'
+  | 'heart'
+  | 'chevron-down'
+  | 'close'
+  | 'glasses'
+  | 'copy'
