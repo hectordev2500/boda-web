@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, reactive, ref } from 'vue'
+import { onBeforeUnmount, onMounted, reactive, ref, computed } from 'vue'
 import roseImgUrl from '../assets/img/white_rose.png'
 import FloralBorder from './ui/FloralBorder.vue'
 import SectionTitle from './ui/SectionTitle.vue'
@@ -37,6 +37,8 @@ const circles = reactive<ScratchCircle[]>([
     isRevealed: false,
   },
 ])
+
+const allRevealed = computed(() => circles.every((circle) => circle.isRevealed ))
 
 const canvasRefs = ref<(HTMLCanvasElement | null)[]>([])
 const drawingCanvases = new Set<HTMLCanvasElement>()
@@ -198,7 +200,8 @@ function getScratchedPercentage(canvas: HTMLCanvasElement, sampleStep: number = 
           ></canvas>
         </li>
       </ul>
-      <button type="button" @click="revealAll" class="mt-10 text-sm text-wedding-olive underline underline-offset-4">
+      <p v-if="allRevealed" class="mt-10 text-2xl italic " aria-live="polite">¡Guarda la fecha!</p>
+      <button v-else type="button" @click="revealAll" class="mt-10 text-sm text-wedding-olive underline underline-offset-4">
         Mostrar la fecha sin rascar
       </button>
     </div>
