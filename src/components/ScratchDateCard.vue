@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, reactive, ref } from 'vue'
+import { onBeforeUnmount, onMounted, reactive, ref } from 'vue'
 import roseImgUrl from '../assets/img/white_rose.png'
 import FloralBorder from './ui/FloralBorder.vue'
 import SectionTitle from './ui/SectionTitle.vue'
@@ -15,6 +15,7 @@ const props = defineProps<{ weddingDate: string }>()
 
 const BRUSH_RADIUS = 20
 const CANVAS_SIZE = 150
+const UMBRAL = 60
 
 // Los valores salen de la fecha de la boda en lugar de estar escritos a mano.
 const date = new Date(props.weddingDate)
@@ -40,6 +41,7 @@ const circles = reactive<ScratchCircle[]>([
 const canvasRefs = ref<(HTMLCanvasElement | null)[]>([])
 const drawingCanvases = new Set<HTMLCanvasElement>()
 const canvasesToCheck = new Set<HTMLCanvasElement>()
+let pendingId: number | null = null
 
 onMounted(() => {
   const imagen = new Image()
@@ -64,16 +66,10 @@ onMounted(() => {
     ctx.textBaseline = 'middle'
     ctx.fillText('RASCA', canvas.width / 2, canvas.height / 2)
   }
+})
 
-  // ⬇️ TU BORRADOR — pendiente de terminar (ver la revisión: bugs 1–3 y el TODO).
-  function checkScratchProgress(): void {
-    canvasesToCheck.forEach((canvas) => {
-      const percentage = getScratchedPercentage(canvas)
-      // aquí: decidir si ya superó el umbral, encontrar su índice en `circles`, marcar isRevealed
-      canvasesToCheck.delete(canvas) // ya lo revisamos, lo quitamos hasta la próxima marca
-    })
-    requestAnimationFrame(checkScratchProgress)
-  }
+onBeforeUnmount(() => {
+  if (pendingId !== null) cancelAnimationFrame(pendingId)
 })
 
 function getCanvasCoords(event: PointerEvent, canvas: HTMLCanvasElement): { x: number; y: number } {
@@ -112,6 +108,8 @@ function handlePointerMove(event: PointerEvent): void {
   const { x, y } = getCanvasCoords(event, canvas)
   erase(canvas, x, y, BRUSH_RADIUS)
   canvasesToCheck.add(canvas)
+  if (pendingId !== null) return
+  pendingId = requestAnimationFrame(checkScratchProgress)
 }
 
 // Se usa también para pointercancel: si el navegador cancela el gesto,
@@ -119,6 +117,23 @@ function handlePointerMove(event: PointerEvent): void {
 function handlePointerUp(event: PointerEvent): void {
   const canvas = event.currentTarget as HTMLCanvasElement
   drawingCanvases.delete(canvas)
+}
+
+function checkScratchProgress(): void {
+  pendingId = null
+  canvasesToCheck.forEach((canvas) => {
+    const position = canvasRefs.value.indexOf(canvas)
+    canvasesToCheck.delete(canvas) // ya lo revisamos, lo quitamos hasta la próxima marca
+    if (position === -1) return
+    const circle = circles[position]
+    if (circle.isRevealed) return
+    const percentage = getScratchedPercentage(canvas)
+    if (percentage < UMBRAL) return
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+    circle.isRevealed = true
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+  })
 }
 
 function getScratchedPercentage(canvas: HTMLCanvasElement, sampleStep: number = 4): number {
