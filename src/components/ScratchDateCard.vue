@@ -129,10 +129,22 @@ function checkScratchProgress(): void {
     if (circle.isRevealed) return
     const percentage = getScratchedPercentage(canvas)
     if (percentage < UMBRAL) return
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-    circle.isRevealed = true
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    reveal(canvas, circle)
+  })
+}
+
+function reveal(canvas: HTMLCanvasElement, circle: ScratchCircle): void {
+  const ctx = canvas.getContext('2d')
+  if (!ctx) return
+  circle.isRevealed = true
+  ctx.clearRect(0, 0, canvas.width, canvas.height)
+}
+
+function revealAll(): void {
+  circles.forEach((circle, index) => {
+    const canvas = canvasRefs.value[index]
+    if (!canvas || circle.isRevealed) return
+    reveal(canvas, circle)
   })
 }
 
@@ -158,7 +170,7 @@ function getScratchedPercentage(canvas: HTMLCanvasElement, sampleStep: number = 
     <div class="px-4 pt-[calc(3rem+min(11.65vw,80px))] pb-12 text-center">
       <SectionTitle title="Ver la fecha" />
       <p class="mx-auto mb-10 max-w-xs text-sm tracking-[0.25em] text-wedding-sand uppercase">
-        Rasca los tres círculos para descubrir la fecha
+        Rasca las tres rosas para descubrir la fecha
       </p>
 
       <ul class="mx-auto flex max-w-md flex-wrap justify-center gap-6">
@@ -186,12 +198,9 @@ function getScratchedPercentage(canvas: HTMLCanvasElement, sampleStep: number = 
           ></canvas>
         </li>
       </ul>
-
-      <!--
-        PENDIENTE (tras checkScratchProgress):
-        - al revelar un círculo: clase pointer-events-none en su canvas
-        - botón "Mostrar la fecha sin rascar" (revealAll) y mensaje "¡Guarda la fecha!"
-      -->
+      <button type="button" @click="revealAll" class="mt-10 text-sm text-wedding-olive underline underline-offset-4">
+        Mostrar la fecha sin rascar
+      </button>
     </div>
     <FloralBorder />
   </section>
