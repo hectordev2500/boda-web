@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import HeroHeader from './components/HeroHeader.vue'
 import ScratchDateCard from './components/ScratchDateCard.vue'
+import CountdownTimer from './components/CountdownTimer.vue'
 import { couple, heroImage } from './data'
 </script>
 
@@ -17,6 +18,10 @@ import { couple, heroImage } from './data'
 
     <div id="fecha">
       <ScratchDateCard :wedding-date="couple.weddingDate" />
+    </div>
+
+    <div id="cuenta-atras">
+      <CountdownTimer :wedding-date="couple.weddingDate" />
     </div>
   </main>
 </template>
