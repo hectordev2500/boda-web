@@ -46,7 +46,9 @@ defineProps<{ couple: Couple; backgroundImageUrl: string; nextSectionId: string 
       <div class="w-40 border-t border-white/70"></div>
 
       <p class="mt-4 text-3xl drop-shadow-md short:mt-2 short:text-2xl sm:text-4xl">¡Nuestra Boda!</p>
-      <p class="mt-3 max-w-xs text-lg text-white/90 drop-shadow-md short:mt-1 short:text-base">{{ couple.heroTagline }}</p>
+      <p class="mt-3 max-w-xs text-lg text-white/90 drop-shadow-md short:mt-1 short:text-base">
+        {{ couple.heroTagline }}
+      </p>
 
       <a
         :href="`#${nextSectionId}`"

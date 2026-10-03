@@ -38,7 +38,7 @@ const circles = reactive<ScratchCircle[]>([
   },
 ])
 
-const allRevealed = computed(() => circles.every((circle) => circle.isRevealed ))
+const allRevealed = computed(() => circles.every((circle) => circle.isRevealed))
 
 const canvasRefs = ref<(HTMLCanvasElement | null)[]>([])
 const drawingCanvases = new Set<HTMLCanvasElement>()
@@ -200,8 +200,13 @@ function getScratchedPercentage(canvas: HTMLCanvasElement, sampleStep: number = 
           ></canvas>
         </li>
       </ul>
-      <p v-if="allRevealed" class="mt-10 text-2xl italic " aria-live="polite">¡Guarda la fecha!</p>
-      <button v-else type="button" @click="revealAll" class="mt-10 text-sm text-wedding-olive underline underline-offset-4">
+      <p v-if="allRevealed" class="mt-10 text-2xl italic" aria-live="polite">¡Guarda la fecha!</p>
+      <button
+        v-else
+        type="button"
+        @click="revealAll"
+        class="mt-10 text-sm text-wedding-olive underline underline-offset-4"
+      >
         Mostrar la fecha sin rascar
       </button>
     </div>
