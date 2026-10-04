@@ -62,11 +62,6 @@ onMounted(() => {
     ctx.fillStyle = '#f3ede2'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
     ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
-    ctx.fillStyle = '#33422e'
-    ctx.font = '600 13px "Cormorant Garamond", serif'
-    ctx.textAlign = 'center'
-    ctx.textBaseline = 'middle'
-    ctx.fillText('RASCA', canvas.width / 2, canvas.height / 2)
   }
 })
 
@@ -171,7 +166,7 @@ function getScratchedPercentage(canvas: HTMLCanvasElement, sampleStep: number = 
     <!-- pt extra = la mitad de la cenefa del hero que se monta sobre esta sección -->
     <div class="px-4 pt-[calc(3rem+min(11.65vw,80px))] pb-12 text-center">
       <SectionTitle title="Ver la fecha" />
-      <p class="mx-auto mb-10 max-w-xs text-sm tracking-[0.25em] text-wedding-sand uppercase">
+      <p class="mx-auto mb-10 max-w-xs text-sm font-semibold tracking-[0.25em] text-wedding-gold-dark uppercase">
         Rasca las tres rosas para descubrir la fecha
       </p>
 

@@ -6,6 +6,8 @@
   --color-wedding-green: #33422e;
   --color-wedding-olive: #6b6b53;
   --color-wedding-gold: #a8894f;
+  --color-wedding-gold-light: #e2c27d; /* dorado claro para texto sobre fotos oscuras */
+  --color-wedding-gold-dark: #6f5420; /* dorado oscuro para texto pequeño sobre crema (contraste ≥ 4.5:1) */
   --color-wedding-sand: #b89e84;
 
   --font-serif: 'Cormorant Garamond', ui-serif, Georgia, serif;
