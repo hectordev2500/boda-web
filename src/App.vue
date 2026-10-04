@@ -2,7 +2,8 @@
 import HeroHeader from './components/HeroHeader.vue'
 import ScratchDateCard from './components/ScratchDateCard.vue'
 import CountdownTimer from './components/CountdownTimer.vue'
-import { couple, heroImage } from './data'
+import EventLocationCard from './components/EventLocationCard.vue'
+import { couple, heroImage, locations } from './data'
 </script>
 
 <template>
@@ -22,6 +23,10 @@ import { couple, heroImage } from './data'
 
     <div id="cuenta-atras">
       <CountdownTimer :wedding-date="couple.weddingDate" />
+    </div>
+
+    <div id="event-location-card">
+      <EventLocationCard v-for="location in locations" :key="location.id" :location="location" />
     </div>
   </main>
 </template>

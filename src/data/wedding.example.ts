@@ -17,7 +17,7 @@ export const locations: EventLocation[] = [
     id: 'boda',
     type: 'celebration',
     title: 'Ceremonia y celebración',
-    date: '2027-06-12T18:00:00+02:00',
+    date: couple.weddingDate,
     venueName: 'Finca de ejemplo',
     address: 'Calle Mayor, 1, 00000 Ciudad',
     mapsUrl: 'https://www.google.com/maps',
