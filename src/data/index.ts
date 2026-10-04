@@ -1,9 +1,10 @@
-import type { Couple } from '../types/wedding'
+import type { Couple, EventLocation } from '../types/wedding'
 import * as example from './wedding.example'
 
 interface WeddingContent {
   couple: Couple
   heroImage: string
+  locations: EventLocation[]
 }
 
 // Si existe src/private/wedding.ts (solo en tu ordenador) se usan los datos reales;
@@ -13,4 +14,4 @@ const privateModules = import.meta.glob<WeddingContent>('../private/wedding.ts',
 
 const content: WeddingContent = Object.values(privateModules)[0] ?? example
 
-export const { couple, heroImage } = content
+export const { couple, heroImage, locations } = content
