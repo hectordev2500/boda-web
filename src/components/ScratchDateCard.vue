@@ -177,7 +177,7 @@ function getScratchedPercentage(canvas: HTMLCanvasElement, sampleStep: number = 
           class="relative size-37.5 overflow-hidden rounded-full bg-wedding-paper shadow-[0_6px_20px_rgba(51,66,46,0.18)] ring-1 ring-wedding-olive/10"
         >
           <div class="absolute inset-0 flex flex-col items-center justify-center" :aria-hidden="!circle.isRevealed">
-            <span class="text-4xl leading-none font-semibold">{{ circle.revealValue }}</span>
+            <span class="text-3xl leading-none font-medium">{{ circle.revealValue }}</span>
             <span class="mt-1 text-xs tracking-widest text-wedding-olive uppercase">{{ circle.label }}</span>
           </div>
           <canvas
