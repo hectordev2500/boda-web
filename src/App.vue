@@ -25,8 +25,16 @@ import { couple, heroImage, locations } from './data'
       <CountdownTimer :wedding-date="couple.weddingDate" />
     </div>
 
-    <div id="event-location-card">
+    <!--
+      Sección transparente: se ve la foto fija de fondo, oscurecida para que la tarjeta destaque.
+      pt extra = la mitad de la cenefa del contador, que se monta sobre esta sección.
+    -->
+    <section
+      id="ubicacion"
+      aria-label="Ubicación"
+      class="space-y-8 bg-black/35 px-4 pt-[calc(4rem+min(11.65vw,80px))] pb-20"
+    >
       <EventLocationCard v-for="location in locations" :key="location.id" :location="location" />
-    </div>
+    </section>
   </main>
 </template>
