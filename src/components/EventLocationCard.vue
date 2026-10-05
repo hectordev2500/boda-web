@@ -36,6 +36,15 @@ const dateParts = computed(() => {
       </div>
 
       <p class="mt-1 text-2xl text-wedding-olive">{{ dateParts.year }}</p>
+      <p class="mt-6 text-2xl">{{ location.venueName }}</p>
+      <p class="mt-1 text-lg text-wedding-olive">{{ location.address }}</p>
+      <a
+        :href="location.mapsUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mt-6 inline-flex min-w-56 items-center justify-center rounded-lg bg-wedding-green px-8 py-3 text-lg text-wedding-cream shadow-sm transition hover:bg-wedding-green/90"
+        >¿Cómo llegar?
+      </a>
     </div>
   </article>
 </template>
