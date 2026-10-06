@@ -3,7 +3,8 @@ import HeroHeader from './components/HeroHeader.vue'
 import ScratchDateCard from './components/ScratchDateCard.vue'
 import CountdownTimer from './components/CountdownTimer.vue'
 import EventLocationCard from './components/EventLocationCard.vue'
-import { couple, heroImage, locations } from './data'
+import { couple, heroImage, locations, gallery } from './data'
+import PhotoGallery from './components/PhotoGallery.vue'
 </script>
 
 <template>
@@ -36,5 +37,7 @@ import { couple, heroImage, locations } from './data'
     >
       <EventLocationCard v-for="location in locations" :key="location.id" :location="location" />
     </section>
+
+    <PhotoGallery :images="gallery" />
   </main>
 </template>
