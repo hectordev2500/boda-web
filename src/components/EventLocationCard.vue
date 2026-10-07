@@ -32,7 +32,7 @@ const dateParts = computed(() => {
       <div class="mt-3 grid grid-cols-[1fr_auto_1fr] items-center gap-3">
         <span class="border-b border-wedding-green/60 pb-1 text-lg font-bold uppercase"> {{ dateParts.weekday }} </span>
         <span class="text-7xl leading-none font-semibold">{{ dateParts.day }}</span>
-        <span class="border-b border-wedding-green/60 pb-1 text-lg font-bold">{{ dateParts.time }}</span>
+        <span class="border-b border-wedding-green/60 pb-1 text-lg font-bold">{{ dateParts.time }} h</span>
       </div>
 
       <p class="mt-1 text-2xl text-wedding-olive">{{ dateParts.year }}</p>

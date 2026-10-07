@@ -18,8 +18,8 @@ const units = computed(() => [
 </script>
 
 <template>
-  <!-- relative z-10: la cenefa inferior sobresale hacia la sección siguiente y debe pintarse por encima. -->
-  <section class="relative z-10 bg-wedding-cream">
+  <!-- relative z-20: la cenefa inferior sobresale hacia la sección siguiente y debe pintarse por encima. -->
+  <section class="relative z-20 bg-wedding-cream">
     <!-- pb extra = la mitad de la cenefa, que ahora se monta dentro de esta sección por abajo -->
     <div class="px-4 pt-14 pb-[calc(3.5rem+min(11.65vw,80px))] text-center">
       <SectionTitle title="Faltan" />

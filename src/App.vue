@@ -5,6 +5,8 @@ import CountdownTimer from './components/CountdownTimer.vue'
 import EventLocationCard from './components/EventLocationCard.vue'
 import { couple, heroImage, locations, gallery } from './data'
 import PhotoGallery from './components/PhotoGallery.vue'
+import InfoCard from './components/InfoCard.vue'
+import FloralBorder from './components/ui/FloralBorder.vue'
 </script>
 
 <template>
@@ -33,11 +35,28 @@ import PhotoGallery from './components/PhotoGallery.vue'
     <section
       id="ubicacion"
       aria-label="Ubicación"
-      class="space-y-8 bg-black/35 px-4 pt-[calc(4rem+min(11.65vw,80px))] pb-20"
+      class="space-y-8 bg-black/35 px-4 pt-[calc(4rem+min(11.65vw,80px))] pb-[calc(5rem+min(11.65vw,80px))] relative z-10"
     >
       <EventLocationCard v-for="location in locations" :key="location.id" :location="location" />
+      <FloralBorder class="absolute inset-x-0 bottom-0 translate-y-1/2" />
     </section>
 
-    <PhotoGallery :images="gallery" />
+    <PhotoGallery :images="gallery" class="pt-[calc(4rem+min(11.65vw,80px))] pb-[calc(4rem+min(11.65vw,80px))]" />
+    <section aria-label="Información para invitados" class="relative z-10 bg-black/35">
+      <FloralBorder class="absolute inset-x-0 top-0 -translate-y-1/2" />
+
+      <div class="space-y-8 px-4 pt-[calc(3rem+min(11.65vw,80px))] pb-[calc(3rem+min(11.65vw,80px))]">
+        <InfoCard
+          title="Música"
+          icon="music"
+          text="¿Cuál es la canción que no puede faltar?"
+          action="Sugerir canción"
+        />
+        <InfoCard title="Dress Code" icon="bowtie" text="Una orientación para tu vestimenta" action="Ver más" />
+        <InfoCard title="Tips y Notas" icon="clipboard" text="Información adicional a considerar" action="Ver más" />
+      </div>
+
+      <FloralBorder class="absolute inset-x-0 bottom-0 translate-y-1/2" />
+    </section>
   </main>
 </template>
