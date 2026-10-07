@@ -50,8 +50,7 @@ export interface DressCodeInfo {
 
 export interface TipNote {
   id: string
-  title: string
-  description: string
+  text: string
 }
 
 export type GiftPaymentMethod = 'bank_transfer' | 'bizum' | 'wishlist_link'

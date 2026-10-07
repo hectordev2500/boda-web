@@ -3,7 +3,7 @@ import HeroHeader from './components/HeroHeader.vue'
 import ScratchDateCard from './components/ScratchDateCard.vue'
 import CountdownTimer from './components/CountdownTimer.vue'
 import EventLocationCard from './components/EventLocationCard.vue'
-import { couple, heroImage, locations, gallery } from './data'
+import { couple, heroImage, locations, gallery, tips } from './data'
 import PhotoGallery from './components/PhotoGallery.vue'
 import InfoCard from './components/InfoCard.vue'
 import FloralBorder from './components/ui/FloralBorder.vue'
@@ -20,8 +20,10 @@ const isTipsOpen = ref(false)
     aria-hidden="true"
   ></div>
 
-  <BaseModal v-model:open="isTipsOpen">
-    <p class="bg-white p-8">Hola, soy un modal</p>
+  <BaseModal v-model:open="isTipsOpen" title="Tips y Notas" icon="clipboard">
+    <ul class="space-y-4 text-center text-lg">
+      <li v-for="tip in tips" :key="tip.id">{{ tip.text }}</li>
+    </ul>
   </BaseModal>
 
   <main class="overflow-x-hidden">
