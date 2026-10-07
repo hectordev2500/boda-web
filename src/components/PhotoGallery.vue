@@ -40,6 +40,10 @@ function openImage(image: GalleryImage): void {
 function closeImage(): void {
   dialogRef.value?.close()
 }
+
+function handleBackdropClick(event: MouseEvent): void {
+  if (event.target === dialogRef.value) closeImage()
+}
 </script>
 
 <template>
@@ -75,9 +79,26 @@ function closeImage(): void {
         @click="goTo(index)"
       ></button>
     </div>
-    <dialog ref="dialogRef" class="backdrop:bg-black/85" @close="selectImage = null">
-      <img v-if="selectImage" :src="selectImage.url" :alt="selectImage.alt" />
-      <button type="button" @click="closeImage" aria-label="Cerrar">X</button>
+    <dialog
+      ref="dialogRef"
+      class="backdrop:bg-black/85 m-auto bg-transparent p-0 max-h-[90dvh] max-w-[95vw]"
+      @click="handleBackdropClick"
+      @close="selectImage = null"
+    >
+      <img
+        v-if="selectImage"
+        :src="selectImage.url"
+        :alt="selectImage.alt"
+        class="max-h-[85dvh] w-auto object-contain"
+      />
+      <button
+        type="button"
+        @click="closeImage"
+        aria-label="Cerrar"
+        class="absolute top-2 right-2 rounded-full bg-black/50 p-2 text-white"
+      >
+        <LineIcon name="close" class="h-6 w-6" />
+      </button>
     </dialog>
   </section>
 </template>
