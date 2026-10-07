@@ -9,6 +9,8 @@ const trackRef = ref<HTMLUListElement | null>(null)
 const slideRefs = ref<HTMLLIElement[]>([])
 const activeIndex = ref(0)
 let observer: IntersectionObserver | null = null
+const dialogRef = ref<HTMLDialogElement | null>(null)
+const selectImage = ref<GalleryImage | null>(null)
 
 onMounted(() => {
   observer = new IntersectionObserver(
@@ -29,6 +31,15 @@ onBeforeUnmount(() => observer?.disconnect())
 function goTo(index: number): void {
   slideRefs.value[index]?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
 }
+
+function openImage(image: GalleryImage): void {
+  selectImage.value = image
+  dialogRef.value?.showModal()
+}
+
+function closeImage(): void {
+  dialogRef.value?.close()
+}
 </script>
 
 <template>
@@ -43,11 +54,13 @@ function goTo(index: number): void {
     >
       <li
         ref="slideRefs"
-        v-for="image in images"
+        v-for="(image, index) in images"
         :key="image.id"
         class="sm:w-96 w-[80%] shrink-0 snap-center bg-white p-3 shadow-md"
       >
-        <img :src="image.url" :alt="image.alt" loading="lazy" class="aspect-[4/5] w-full object-cover" />
+        <button type="button" @click="openImage(image)" :aria-label="`Ampliar foto ${index + 1}`">
+          <img :src="image.url" :alt="image.alt" loading="lazy" class="aspect-[4/5] w-full object-cover" />
+        </button>
       </li>
     </ul>
     <div class="flex justify-center gap-3 mt-4">
@@ -62,5 +75,9 @@ function goTo(index: number): void {
         @click="goTo(index)"
       ></button>
     </div>
+    <dialog ref="dialogRef" class="backdrop:bg-black/85" @close="selectImage = null">
+      <img v-if="selectImage" :src="selectImage.url" :alt="selectImage.alt" />
+      <button type="button" @click="closeImage" aria-label="Cerrar">X</button>
+    </dialog>
   </section>
 </template>
