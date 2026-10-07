@@ -7,6 +7,9 @@ import { couple, heroImage, locations, gallery } from './data'
 import PhotoGallery from './components/PhotoGallery.vue'
 import InfoCard from './components/InfoCard.vue'
 import FloralBorder from './components/ui/FloralBorder.vue'
+import { ref } from 'vue'
+import BaseModal from './components/ui/BaseModal.vue'
+const isTipsOpen = ref(false)
 </script>
 
 <template>
@@ -16,6 +19,10 @@ import FloralBorder from './components/ui/FloralBorder.vue'
     :style="{ backgroundImage: `url(${heroImage})` }"
     aria-hidden="true"
   ></div>
+
+  <BaseModal v-model:open="isTipsOpen">
+    <p class="bg-white p-8">Hola, soy un modal</p>
+  </BaseModal>
 
   <main class="overflow-x-hidden">
     <HeroHeader :couple="couple" :background-image-url="heroImage" next-section-id="fecha" />
@@ -53,7 +60,14 @@ import FloralBorder from './components/ui/FloralBorder.vue'
           action="Sugerir canción"
         />
         <InfoCard title="Dress Code" icon="bowtie" text="Una orientación para tu vestimenta" action="Ver más" />
-        <InfoCard title="Tips y Notas" icon="clipboard" text="Información adicional a considerar" action="Ver más" />
+
+        <InfoCard
+          title="Tips y Notas"
+          icon="clipboard"
+          text="Información adicional a considerar"
+          action="Ver más"
+          @open="isTipsOpen = true"
+        />
       </div>
 
       <FloralBorder class="absolute inset-x-0 bottom-0 translate-y-1/2" />
