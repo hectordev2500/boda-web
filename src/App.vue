@@ -49,7 +49,7 @@ import FloralBorder from './components/ui/FloralBorder.vue'
         <InfoCard
           title="Música"
           icon="music"
-          text="¿Cuál es la canción que no puede faltar?"
+          text="¿Cuál es la canción que no puede faltar en la lista de reproducción de la fiesta?"
           action="Sugerir canción"
         />
         <InfoCard title="Dress Code" icon="bowtie" text="Una orientación para tu vestimenta" action="Ver más" />
