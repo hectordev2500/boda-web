@@ -54,7 +54,7 @@ function handleBackdropClick(event: MouseEvent): void {
     </div>
     <ul
       ref="trackRef"
-      class="mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto sm:px-[calc(50%-12rem)] px-[10%] pb-4 [scrollbar-width:none]"
+      class="mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto sm:px-[calc(50%-12rem)] px-[10%] pb-4 scrollbar-none"
     >
       <li
         ref="slideRefs"
