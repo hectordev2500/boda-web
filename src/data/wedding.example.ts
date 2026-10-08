@@ -1,6 +1,6 @@
 // DATOS DE EJEMPLO — son los que se ven en GitHub y en la demo pública.
 // Para usar datos reales, copia este archivo a src/private/wedding.ts (ignorado por Git).
-import type { Couple, EventLocation, GalleryImage, TipNote } from '../types/wedding'
+import type { Couple, EventLocation, GalleryImage, TipNote, DressCodeInfo } from '../types/wedding'
 import heroImage from '../assets/img/hero-placeholder.svg'
 
 export { heroImage }
@@ -40,3 +40,9 @@ export const tips: TipNote[] = [
   { id: 'abrigo', text: 'Traed una chaqueta para disfrutar de los espacios exteriores.' },
   { id: 'olvidaos', text: '¡Olvidaos de todo y disfrutad!' },
 ]
+
+export const dressCode: DressCodeInfo = {
+  description: 'Formal de día. Vestidos midi o largos y traje con o sin corbata.',
+  palette: ['#e9dfd1', '#c9b8a3', '#a3a48a', '#6b6b53', '#33422e'],
+  avoid: 'El blanco y sus tonos cercanos se reservan para la novia.',
+}

@@ -41,8 +41,6 @@ export interface SongSuggestion {
 export type SongSuggestionPayload = Omit<SongSuggestion, 'id' | 'createdAt'>
 
 export interface DressCodeInfo {
-  title: string
-  subtitle: string
   description: string
   palette: string[]
   avoid: string
