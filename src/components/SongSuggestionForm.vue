@@ -1,11 +1,19 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 
 const form = reactive({ guestName: '', song: '', youtubeUrl: '' })
+const status = ref<'idle' | 'sending' | 'sent'>('idle')
+
+async function handleSubmit(): Promise<void> {
+  status.value = 'sending'
+  await new Promise((resolve) => setTimeout(resolve, 1000))
+  status.value = 'sent'
+}
 </script>
 
 <template>
-  <form class="space-y-6">
+  <p v-if="status === 'sent'" class="text-center text-xl">¡Gracias! La añadiremos a la lista 🎶</p>
+  <form v-else @submit.prevent="handleSubmit" class="space-y-6">
     <div>
       <input
         id="song-guest-name"
@@ -40,10 +48,11 @@ const form = reactive({ guestName: '', song: '', youtubeUrl: '' })
     </div>
     <div class="pt-2 text-center">
       <button
+        :disabled="status === 'sending'"
         type="submit"
         class="inline-flex min-w-56 items-center justify-center rounded-lg bg-wedding-ink px-8 py-3 text-lg text-wedding-cream shadow-sm transition hover:bg-wedding-ink/90 disabled:cursor-not-allowed disabled:opacity-60"
       >
-        Sugerir canción
+        {{ status === 'sending' ? 'Enviando…' : 'Sugerir canción' }}
       </button>
     </div>
   </form>
