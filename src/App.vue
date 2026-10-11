@@ -9,8 +9,10 @@ import InfoCard from './components/InfoCard.vue'
 import FloralBorder from './components/ui/FloralBorder.vue'
 import { ref } from 'vue'
 import BaseModal from './components/ui/BaseModal.vue'
+import SongSuggestionForm from './components/SongSuggestionForm.vue'
 const isTipsOpen = ref(false)
 const isDressCodeOpen = ref(false)
+const isMusicOpen = ref(false)
 </script>
 
 <template>
@@ -20,6 +22,10 @@ const isDressCodeOpen = ref(false)
     :style="{ backgroundImage: `url(${heroImage})` }"
     aria-hidden="true"
   ></div>
+
+  <BaseModal v-model:open="isMusicOpen" title="Sugerir canción" icon="music">
+    <SongSuggestionForm />
+  </BaseModal>
 
   <BaseModal v-model:open="isDressCodeOpen" title="Código de vestimenta" icon="bowtie">
     <p class="text-center text-lg">{{ dressCode.description }}</p>
@@ -76,6 +82,7 @@ const isDressCodeOpen = ref(false)
           icon="music"
           text="¿Cuál es la canción que no puede faltar en la lista de reproducción de la fiesta?"
           action="Sugerir canción"
+          @open="isMusicOpen = true"
         />
         <InfoCard
           title="Código de vestimenta"
