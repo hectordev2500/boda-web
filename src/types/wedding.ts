@@ -33,16 +33,6 @@ export interface GalleryImage {
   focus?: string
 }
 
-export interface SongSuggestion {
-  id: string
-  songTitle: string
-  artist: string
-  suggestedBy?: string
-  createdAt: string // ISO 8601
-}
-
-export type SongSuggestionPayload = Omit<SongSuggestion, 'id' | 'createdAt'>
-
 export interface VetoedColor {
   name: string // ej. «Blanco»: se muestra bajo el círculo (no todo el mundo distingue los colores)
   hex: string // ej. '#ffffff'
@@ -58,41 +48,8 @@ export interface TipNote {
   text: string
 }
 
-export type GiftPaymentMethod = 'bank_transfer' | 'bizum' | 'wishlist_link'
-
-export interface GiftPaymentInfo {
-  method: GiftPaymentMethod
-  label: string
-  value: string // IBAN, teléfono o URL según el método
-}
-
-export interface GiftsInfo {
+export interface Poem {
   title: string
-  message: string
-  paymentOptions: GiftPaymentInfo[]
-}
-
-export type RsvpAttendance = 'attending' | 'not_attending'
-
-export interface RsvpFormPayload {
-  fullName: string
-  attendance: RsvpAttendance
-  guestCount: number
-  dietaryNotes?: string
-  message?: string
-}
-
-export interface RsvpEntry extends RsvpFormPayload {
-  id: string
-  createdAt: string // ISO 8601
-}
-
-export interface WeddingData {
-  couple: Couple
-  locations: EventLocation[]
-  gallery: GalleryImage[]
-  dressCode: DressCodeInfo
-  tips: TipNote[]
-  gifts: GiftsInfo
-  photoUploadUrl: string
+  author: string
+  pages: string[]
 }

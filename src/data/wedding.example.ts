@@ -1,6 +1,6 @@
 // DATOS DE EJEMPLO — son los que se ven en GitHub y en la demo pública.
 // Para usar datos reales, copia este archivo a src/private/wedding.ts (ignorado por Git).
-import type { Couple, EventLocation, GalleryImage, TipNote, DressCodeInfo } from '../types/wedding'
+import type { Couple, EventLocation, GalleryImage, TipNote, DressCodeInfo, Poem } from '../types/wedding'
 import heroImage from '../assets/img/hero-placeholder.svg'
 
 export { heroImage }
@@ -48,5 +48,15 @@ export const dressCode: DressCodeInfo = {
     { name: 'Blanco', hex: '#ffffff' },
     { name: 'Marfil', hex: '#f3ead8' },
     { name: 'Azul marino', hex: '#1f2a44' },
+  ],
+}
+
+export const poem: Poem = {
+  title: 'Un poema para vosotros',
+  author: 'Gustavo Adolfo Bécquer, «Rimas»',
+  pages: [
+    '¿Qué es poesía?, dices mientras clavas\nen mi pupila tu pupila azul.\n¿Qué es poesía? ¿Y tú me lo preguntas?\nPoesía... eres tú.',
+    'Por una mirada, un mundo;\npor una sonrisa, un cielo;\npor un beso... ¡yo no sé\nqué te diera por un beso!',
+    'Hoy la tierra y los cielos me sonríen;\nhoy llega al fondo de mi alma el sol;\nhoy la he visto..., la he visto y me ha mirado...\n¡Hoy creo en Dios!',
   ],
 }
