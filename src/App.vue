@@ -3,13 +3,14 @@ import HeroHeader from './components/HeroHeader.vue'
 import ScratchDateCard from './components/ScratchDateCard.vue'
 import CountdownTimer from './components/CountdownTimer.vue'
 import EventLocationCard from './components/EventLocationCard.vue'
-import { couple, heroImage, locations, gallery, tips, dressCode } from './data'
+import { couple, heroImage, locations, gallery, tips, dressCode, poem } from './data'
 import PhotoGallery from './components/PhotoGallery.vue'
 import InfoCard from './components/InfoCard.vue'
 import FloralBorder from './components/ui/FloralBorder.vue'
 import { ref } from 'vue'
 import BaseModal from './components/ui/BaseModal.vue'
 import SongSuggestionForm from './components/SongSuggestionForm.vue'
+import PoemBook from './components/PoemBook.vue'
 const isTipsOpen = ref(false)
 const isDressCodeOpen = ref(false)
 const isMusicOpen = ref(false)
@@ -73,6 +74,7 @@ const isMusicOpen = ref(false)
     </section>
 
     <PhotoGallery :images="gallery" class="pt-[calc(4rem+min(11.65vw,80px))] pb-[calc(4rem+min(11.65vw,80px))]" />
+
     <section aria-label="Información para invitados" class="relative z-10 bg-black/35">
       <FloralBorder class="absolute inset-x-0 top-0 -translate-y-1/2" />
 
@@ -103,5 +105,6 @@ const isMusicOpen = ref(false)
 
       <FloralBorder class="absolute inset-x-0 bottom-0 translate-y-1/2" />
     </section>
+    <PoemBook :poem="poem" class="pt-[calc(4rem+min(11.65vw,80px))] pb-[calc(4rem+min(11.65vw,80px))]" />
   </main>
 </template>
