@@ -47,9 +47,12 @@ function handleBackdropClick(event: MouseEvent): void {
 </script>
 
 <template>
-  <section class="bg-wedding-paper py-16">
+  <section class="bg-wedding-bg py-16">
     <div class="px-4">
-      <SectionTitle title="Retratos de nuestro amor" subtitle="La clave es disfrutar cada momento" />
+      <SectionTitle
+        :title="'«Fotografiar a alguien es una forma de mirarlo\ncon una insistencia que confina con el amor».'"
+        subtitle="Colette"
+      />
       <LineIcon name="camera" class="mx-auto mt-6 h-16 w-16 text-wedding-olive" />
     </div>
     <ul

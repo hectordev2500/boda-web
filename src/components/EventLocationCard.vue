@@ -21,7 +21,7 @@ const dateParts = computed(() => {
 </script>
 
 <template>
-  <article class="mx-auto w-full max-w-sm overflow-hidden rounded-3xl bg-wedding-paper text-center shadow-xl">
+  <article class="mx-auto w-full max-w-sm overflow-hidden rounded-3xl bg-wedding-bg text-center shadow-xl">
     <div class="px-6 pt-8 pb-5">
       <LineIcon name="glasses" class="mx-auto h-20 w-20 text-wedding-gold" />
       <h3 class="mt-3 text-4xl font-bold tracking-wide uppercase">{{ location.title }}</h3>

@@ -13,7 +13,7 @@ defineEmits<{ open: [] }>()
 </script>
 
 <template>
-  <article class="mx-auto w-full max-w-sm rounded-3xl bg-wedding-paper px-6 py-10 text-center shadow-xl">
+  <article class="mx-auto w-full max-w-sm rounded-3xl bg-wedding-bg px-6 py-10 text-center shadow-xl">
     <h3 class="text-4xl">{{ title }}</h3>
     <LineIcon :name="icon" class="mx-auto my-8 h-16 w-16 text-wedding-green" />
     <p class="mx-auto max-w-64 text-lg">{{ text }}</p>

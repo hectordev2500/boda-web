@@ -162,7 +162,7 @@ function getScratchedPercentage(canvas: HTMLCanvasElement, sampleStep: number = 
 </script>
 
 <template>
-  <section class="bg-wedding-cream">
+  <section class="bg-wedding-bg">
     <!-- pt extra = la mitad de la cenefa del hero que se monta sobre esta sección -->
     <div class="px-4 pt-[calc(3rem+min(11.65vw,80px))] pb-12 text-center">
       <SectionTitle title="Ver la fecha" />
