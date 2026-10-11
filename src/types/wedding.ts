@@ -28,6 +28,9 @@ export interface GalleryImage {
   id: string
   url: string
   alt: string
+  // Qué parte de la foto conservar al recortarla en el carrusel (CSS object-position).
+  // Opcional: si no se indica, se usa el centro. Ej. '90% 50%' para personas a la derecha.
+  focus?: string
 }
 
 export interface SongSuggestion {
