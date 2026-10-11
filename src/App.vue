@@ -61,10 +61,10 @@ const isTipsOpen = ref(false)
           text="¿Cuál es la canción que no puede faltar en la lista de reproducción de la fiesta?"
           action="Sugerir canción"
         />
-        <InfoCard title="Dress Code" icon="bowtie" text="Una orientación para tu vestimenta" action="Ver más" />
+        <InfoCard title="Codigo de Vestimenta" icon="bowtie" text="Colores que vestiran los novios " action="Ver más" />
 
         <InfoCard
-          title="Tips y Notas"
+          title="Notas"
           icon="clipboard"
           text="Información adicional a considerar"
           action="Ver más"
