@@ -30,9 +30,9 @@ const dateParts = computed(() => {
     <div class="border-t border-wedding-olive/30 px-6 pt-6 pb-8">
       <p class="text-2xl tracking-[0.15rem] text-wedding-olive">{{ dateParts.month }}</p>
       <div class="mt-3 grid grid-cols-[1fr_auto_1fr] items-center gap-3">
-        <span class="border-b border-wedding-green/60 pb-1 text-lg font-bold uppercase"> {{ dateParts.weekday }} </span>
+        <span class="border-b border-wedding-ink/60 pb-1 text-lg font-bold uppercase"> {{ dateParts.weekday }} </span>
         <span class="text-7xl leading-none font-semibold">{{ dateParts.day }}</span>
-        <span class="border-b border-wedding-green/60 pb-1 text-lg font-bold">{{ dateParts.time }} h</span>
+        <span class="border-b border-wedding-ink/60 pb-1 text-lg font-bold">{{ dateParts.time }} h</span>
       </div>
 
       <p class="mt-1 text-2xl text-wedding-olive">{{ dateParts.year }}</p>
@@ -42,7 +42,7 @@ const dateParts = computed(() => {
         :href="location.mapsUrl"
         target="_blank"
         rel="noopener noreferrer"
-        class="mt-6 inline-flex min-w-56 items-center justify-center rounded-lg bg-wedding-green px-8 py-3 text-lg text-wedding-cream shadow-sm transition hover:bg-wedding-green/90"
+        class="mt-6 inline-flex min-w-56 items-center justify-center rounded-lg bg-wedding-ink px-8 py-3 text-lg text-wedding-cream shadow-sm transition hover:bg-wedding-ink/90"
         >¿Cómo llegar?
       </a>
     </div>

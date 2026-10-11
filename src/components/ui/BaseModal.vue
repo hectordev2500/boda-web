@@ -43,7 +43,7 @@ function handleBackdropClick(event: MouseEvent): void {
       <button
         type="button"
         aria-label="Cerrar"
-        class="absolute -top-3 -right-3 flex size-10 items-center justify-center rounded-full bg-wedding-green text-wedding-cream shadow-md"
+        class="absolute -top-3 -right-3 flex size-10 items-center justify-center rounded-full bg-wedding-ink text-wedding-cream shadow-md"
         @click="handleClose"
       >
         <LineIcon name="close" class="size-5" />

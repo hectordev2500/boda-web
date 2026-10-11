@@ -15,11 +15,11 @@ defineEmits<{ open: [] }>()
 <template>
   <article class="mx-auto w-full max-w-sm rounded-3xl bg-wedding-bg px-6 py-10 text-center shadow-xl">
     <h3 class="text-4xl">{{ title }}</h3>
-    <LineIcon :name="icon" class="mx-auto my-8 h-16 w-16 text-wedding-green" />
+    <LineIcon :name="icon" class="mx-auto my-8 h-16 w-16 text-wedding-ink" />
     <p class="mx-auto max-w-64 text-lg">{{ text }}</p>
     <button
       type="button"
-      class="mt-8 inline-flex min-w-56 items-center justify-center rounded-lg bg-wedding-green px-8 py-3 text-lg text-wedding-cream shadow-sm transition hover:bg-wedding-green/90"
+      class="mt-8 inline-flex min-w-56 items-center justify-center rounded-lg bg-wedding-ink px-8 py-3 text-lg text-wedding-cream shadow-sm transition hover:bg-wedding-ink/90"
       @click="$emit('open')"
     >
       {{ action }}

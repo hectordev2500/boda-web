@@ -1,13 +1,14 @@
 @import 'tailwindcss';
 
 @theme {
-  /* Fondo de las secciones y de la página (marfil dorado). */
+  /* Fondo de las secciones y de la página (champán). */
   --color-wedding-bg: #f7efdc;
-  /* Crema: letras de los botones verdes y fondo de los modales. */
+  /* Crema: letras de los botones y fondo de los modales. */
   --color-wedding-cream: #f7f3ea;
   --color-wedding-gold-bright: #b8862b;
   --color-wedding-paper: #fbf9f4;
-  --color-wedding-green: #4a3527;
+  /* Tinta: texto, iconos y botones (café espresso). */
+  --color-wedding-ink: #4a3527;
   --color-wedding-olive: #6b6b53;
   --color-wedding-gold: #a8894f;
   --color-wedding-gold-light: #e2c27d; /* dorado claro para texto sobre fotos oscuras */
@@ -27,7 +28,7 @@
   }
 
   body {
-    @apply bg-wedding-bg font-serif text-wedding-green antialiased;
+    @apply bg-wedding-bg font-serif text-wedding-ink antialiased;
   }
 }
 

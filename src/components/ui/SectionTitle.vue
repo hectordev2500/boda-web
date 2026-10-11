@@ -7,7 +7,7 @@ withDefaults(defineProps<{ title: string; subtitle?: string; light?: boolean }>(
 
 <template>
   <div class="text-center">
-    <h2 class="text-4xl whitespace-pre-line sm:text-5xl" :class="light ? 'text-white' : 'text-wedding-green'">
+    <h2 class="text-4xl whitespace-pre-line sm:text-5xl" :class="light ? 'text-white' : 'text-wedding-ink'">
       {{ title }}
     </h2>
     <hr class="mx-auto my-4 w-16 border-t" :class="light ? 'border-white/60' : 'border-wedding-olive/40'" />
