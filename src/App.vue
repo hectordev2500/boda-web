@@ -3,13 +3,14 @@ import HeroHeader from './components/HeroHeader.vue'
 import ScratchDateCard from './components/ScratchDateCard.vue'
 import CountdownTimer from './components/CountdownTimer.vue'
 import EventLocationCard from './components/EventLocationCard.vue'
-import { couple, heroImage, locations, gallery, tips } from './data'
+import { couple, heroImage, locations, gallery, tips, dressCode } from './data'
 import PhotoGallery from './components/PhotoGallery.vue'
 import InfoCard from './components/InfoCard.vue'
 import FloralBorder from './components/ui/FloralBorder.vue'
 import { ref } from 'vue'
 import BaseModal from './components/ui/BaseModal.vue'
 const isTipsOpen = ref(false)
+const isDressCodeOpen = ref(false)
 </script>
 
 <template>
@@ -20,7 +21,22 @@ const isTipsOpen = ref(false)
     aria-hidden="true"
   ></div>
 
-  <BaseModal v-model:open="isTipsOpen" title="Tips y Notas" icon="clipboard">
+  <BaseModal v-model:open="isDressCodeOpen" title="Código de vestimenta" icon="bowtie">
+    <p class="text-center text-lg">{{ dressCode.description }}</p>
+
+    <h3 class="mt-8 text-center text-sm tracking-[0.2em] text-wedding-olive uppercase">Colores vetados</h3>
+    <ul class="mt-4 flex flex-wrap justify-center gap-6">
+      <li v-for="color in dressCode.vetoedColors" :key="color.hex" class="flex flex-col items-center gap-2">
+        <span
+          class="size-12 rounded-full ring-1 ring-black/15"
+          :style="{ backgroundColor: color.hex }"
+          aria-hidden="true"
+        ></span>
+        <span class="text-base">{{ color.name }}</span>
+      </li>
+    </ul>
+  </BaseModal>
+  <BaseModal v-model:open="isTipsOpen" title="Notas" icon="clipboard">
     <ul class="space-y-4 text-center text-lg">
       <li v-for="tip in tips" :key="tip.id">{{ tip.text }}</li>
     </ul>
@@ -61,7 +77,13 @@ const isTipsOpen = ref(false)
           text="¿Cuál es la canción que no puede faltar en la lista de reproducción de la fiesta?"
           action="Sugerir canción"
         />
-        <InfoCard title="Codigo de Vestimenta" icon="bowtie" text="Colores que vestiran los novios " action="Ver más" />
+        <InfoCard
+          title="Código de vestimenta"
+          icon="bowtie"
+          text="Colores que vestirán los novios"
+          action="Ver más"
+          @open="isDressCodeOpen = true"
+        />
 
         <InfoCard
           title="Notas"

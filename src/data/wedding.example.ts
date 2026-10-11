@@ -42,7 +42,11 @@ export const tips: TipNote[] = [
 ]
 
 export const dressCode: DressCodeInfo = {
-  description: 'Formal de día. Vestidos midi o largos y traje con o sin corbata.',
-  palette: ['#e9dfd1', '#c9b8a3', '#a3a48a', '#6b6b53', '#33422e'],
-  avoid: 'El blanco y sus tonos cercanos se reservan para la novia.',
+  description: 'Estos son los colores que vestirán los novios. Por favor, evitad llevarlos.',
+  // Colores de ejemplo: sustituir por los definitivos.
+  vetoedColors: [
+    { name: 'Blanco', hex: '#ffffff' },
+    { name: 'Marfil', hex: '#f3ead8' },
+    { name: 'Azul marino', hex: '#1f2a44' },
+  ],
 }

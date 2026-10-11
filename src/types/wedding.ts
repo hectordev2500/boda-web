@@ -40,10 +40,14 @@ export interface SongSuggestion {
 
 export type SongSuggestionPayload = Omit<SongSuggestion, 'id' | 'createdAt'>
 
+export interface VetoedColor {
+  name: string // ej. «Blanco»: se muestra bajo el círculo (no todo el mundo distingue los colores)
+  hex: string // ej. '#ffffff'
+}
+
 export interface DressCodeInfo {
-  description: string
-  palette: string[]
-  avoid: string
+  description: string // frase que explica por qué se evitan estos colores
+  vetoedColors: VetoedColor[]
 }
 
 export interface TipNote {
