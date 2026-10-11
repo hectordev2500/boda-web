@@ -9,10 +9,21 @@ async function handleSubmit(): Promise<void> {
   await new Promise((resolve) => setTimeout(resolve, 1000))
   status.value = 'sent'
 }
+
+function sendAnotherSong(): void {
+  form.song = ''
+  form.youtubeUrl = ''
+  status.value = 'idle'
+}
 </script>
 
 <template>
-  <p v-if="status === 'sent'" class="text-center text-xl">¡Gracias! La añadiremos a la lista 🎶</p>
+  <div v-if="status === 'sent'" class="text-center">
+    <p class="text-xl">¡Gracias! La añadiremos a la lista 🎶</p>
+    <button type="button" @click="sendAnotherSong" class="mt-6 text-wedding-ink underline underline-offset-4">
+      Sugerir otra canción
+    </button>
+  </div>
   <form v-else @submit.prevent="handleSubmit" class="space-y-6">
     <div>
       <input
