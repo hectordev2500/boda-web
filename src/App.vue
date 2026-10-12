@@ -11,6 +11,7 @@ import { ref } from 'vue'
 import BaseModal from './components/ui/BaseModal.vue'
 import SongSuggestionForm from './components/SongSuggestionForm.vue'
 import PoemBook from './components/PoemBook.vue'
+import SectionTitle from './components/ui/SectionTitle.vue'
 const isTipsOpen = ref(false)
 const isDressCodeOpen = ref(false)
 const isMusicOpen = ref(false)
@@ -106,5 +107,20 @@ const isMusicOpen = ref(false)
       <FloralBorder class="absolute inset-x-0 bottom-0 translate-y-1/2" />
     </section>
     <PoemBook :poem="poem" class="pt-[calc(4rem+min(11.65vw,80px))] pb-[calc(4rem+min(11.65vw,80px))]" />
+
+    <section id="fotos" aria-label="Compartir fotos" class="relative z-10 bg-black/35">
+      <FloralBorder class="absolute inset-x-0 top-0 -translate-y-1/2" />
+      <div class="space-y-8 px-4 pt-[calc(3rem+min(11.65vw,80px))] pb-[calc(3rem+min(11.65vw,80px))] text-center">
+        <SectionTitle light title="Compartimos este día junto a ti" subtitle="Escanea el código y sube tus fotos" />
+        <div class="mx-auto size-48 bg-white p-3 shadow-md"></div>
+        <button
+          type="button"
+          class="inline-flex min-w-56 items-center justify-center rounded-lg bg-wedding-ink px-8 py-3 text-lg text-wedding-cream shadow-sm transition hover:bg-wedding-ink/90"
+        >
+          Subir fotos
+        </button>
+      </div>
+      <FloralBorder class="absolute inset-x-0 bottom-0 translate-y-1/2" />
+    </section>
   </main>
 </template>
