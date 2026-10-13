@@ -49,13 +49,13 @@ function handleFilesChange(event: Event): void {
       <li v-for="media in selectedMedia" :key="media.id">
         <video
           v-if="media.file.type.startsWith('video/')"
-          :src="media.previewUrl"
+          :src="`${media.previewUrl}#t=0.1`"
           muted
           playsinline
           class="aspect-square w-full object-cover rounded-md"
           preload="metadata"
         ></video>
-        <img v-else :src="media.previewUrl" class="aspect-square w-full object-cover rounded-md" />
+        <img v-else :src="media.previewUrl" alt="" class="aspect-square w-full object-cover rounded-md" />
       </li>
     </ul>
   </form>
