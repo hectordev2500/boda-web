@@ -1,0 +1,36 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+import LineIcon from './ui/LineIcon.vue'
+const selectedFiles = ref<File[]>([])
+const MAX_FILE_SIZE = 50 * 1024 * 1024 //50MB
+const sizeMessage = ref<string | null>(null)
+
+function handleFilesChange(event: Event): void {
+  const input = event.target as HTMLInputElement
+  const chosenFiles = Array.from(input.files ?? [])
+  const validFiles = chosenFiles.filter((file) => file.size <= MAX_FILE_SIZE)
+  selectedFiles.value = validFiles
+
+  if (chosenFiles.length > validFiles.length) {
+    sizeMessage.value = 'Algún archivo pesa más de 50 MB y no se ha añadido. Envíaselo a los novios por WhatsApp.'
+  } else {
+    sizeMessage.value = null
+  }
+}
+</script>
+
+<template>
+  <form @submit.prevent class="text-center space-y-4">
+    <label
+      class="inline-flex gap-2 min-w-56 items-center justify-center rounded-lg bg-wedding-ink px-8 py-3 text-lg text-wedding-cream shadow-sm transition hover:bg-wedding-ink/90 cursor-pointer has-focus-visible:ring-offset-2 has-focus-visible:ring-2 has-focus-visible:ring-wedding-gold"
+    >
+      <LineIcon name="camera" class="size-5" />
+      Elegir fotos o vídeos
+      <input type="file" accept="image/*,video/*" multiple @change="handleFilesChange" class="sr-only" />
+    </label>
+    <p v-if="selectedFiles.length >= 1">
+      {{ selectedFiles.length }} {{ selectedFiles.length === 1 ? 'archivo seleccionado' : 'archivos seleccionados' }}
+    </p>
+    <p v-if="sizeMessage">{{ sizeMessage }}</p>
+  </form>
+</template>

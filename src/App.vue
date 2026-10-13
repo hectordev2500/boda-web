@@ -10,9 +10,11 @@ import FloralBorder from './components/ui/FloralBorder.vue'
 import { ref } from 'vue'
 import BaseModal from './components/ui/BaseModal.vue'
 import SongSuggestionForm from './components/SongSuggestionForm.vue'
+import PhotoUploadForm from './components/PhotoUploadForm.vue'
 import PoemBook from './components/PoemBook.vue'
 import SectionTitle from './components/ui/SectionTitle.vue'
 import QrCode from './components/QrCode.vue'
+
 const isTipsOpen = ref(false)
 const isDressCodeOpen = ref(false)
 const isMusicOpen = ref(false)
@@ -54,7 +56,7 @@ const shareUrl = window.location.origin + '#fotos'
   </BaseModal>
 
   <BaseModal v-model:open="isPhotosOpen" title="Subir fotos" icon="camera">
-    <p class="text-center">Próximamente</p>
+    <PhotoUploadForm />
   </BaseModal>
 
   <main class="overflow-x-hidden">
