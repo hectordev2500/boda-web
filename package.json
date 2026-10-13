@@ -12,12 +12,14 @@
     "typecheck": "vue-tsc -b"
   },
   "dependencies": {
+    "qrcode": "^1.5.4",
     "vue": "^3.5.42"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^24.13.3",
+    "@types/qrcode": "^1.5.6",
     "@vitejs/plugin-vue": "^6.0.8",
     "@vue/eslint-config-prettier": "^10.2.0",
     "@vue/eslint-config-typescript": "^14.9.0",
