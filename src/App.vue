@@ -25,7 +25,7 @@ const shareUrl = window.location.origin + '#fotos'
 <template>
   <!-- Foto fija de fondo: las secciones transparentes la dejan ver (efecto parallax). -->
   <div
-    class="fixed inset-0 -z-10 bg-cover bg-center"
+    class="fixed inset-x-0 top-0 -z-10 h-lvh transform-gpu bg-cover bg-center"
     :style="{ backgroundImage: `url(${heroImage})` }"
     aria-hidden="true"
   ></div>
@@ -59,7 +59,7 @@ const shareUrl = window.location.origin + '#fotos'
     <PhotoUploadForm />
   </BaseModal>
 
-  <main class="overflow-x-hidden">
+  <main class="overflow-x-clip">
     <HeroHeader :couple="couple" :background-image-url="heroImage" next-section-id="fecha" />
 
     <div id="fecha">

@@ -11,7 +11,7 @@ defineProps<{ couple: Couple; backgroundImageUrl: string; nextSectionId: string 
     z-10: la cenefa inferior sobresale hacia la sección siguiente y debe pintarse por encima.
     El overflow-hidden va solo en la capa de la foto; si estuviera en la section, recortaría la cenefa.
   -->
-  <section class="relative isolate z-10 flex min-h-dvh flex-col">
+  <section class="relative isolate z-10 flex min-h-svh flex-col">
     <!--
       Foto propia del hero (no la fija de fondo) para poder encuadrarla.
       La foto es horizontal y la pareja está abajo en el centro: object-cover recorta los laterales
