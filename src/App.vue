@@ -16,6 +16,7 @@ import QrCode from './components/QrCode.vue'
 const isTipsOpen = ref(false)
 const isDressCodeOpen = ref(false)
 const isMusicOpen = ref(false)
+const isPhotosOpen = ref(false)
 const shareUrl = window.location.origin + '#fotos'
 </script>
 
@@ -50,6 +51,10 @@ const shareUrl = window.location.origin + '#fotos'
     <ul class="space-y-4 text-center text-lg">
       <li v-for="tip in tips" :key="tip.id">{{ tip.text }}</li>
     </ul>
+  </BaseModal>
+
+  <BaseModal v-model:open="isPhotosOpen" title="Subir fotos" icon="camera">
+    <p class="text-center">Próximamente</p>
   </BaseModal>
 
   <main class="overflow-x-hidden">
@@ -120,6 +125,7 @@ const shareUrl = window.location.origin + '#fotos'
         <button
           type="button"
           class="inline-flex min-w-56 items-center justify-center rounded-lg bg-wedding-ink px-8 py-3 text-lg text-wedding-cream shadow-sm transition hover:bg-wedding-ink/90"
+          @click="isPhotosOpen = true"
         >
           Subir fotos
         </button>
