@@ -14,11 +14,14 @@ import PhotoUploadForm from './components/PhotoUploadForm.vue'
 import PoemBook from './components/PoemBook.vue'
 import SectionTitle from './components/ui/SectionTitle.vue'
 import QrCode from './components/QrCode.vue'
+import RsvpForm from './components/RsvpForm.vue'
+import LineIcon from './components/ui/LineIcon.vue'
 
 const isTipsOpen = ref(false)
 const isDressCodeOpen = ref(false)
 const isMusicOpen = ref(false)
 const isPhotosOpen = ref(false)
+const isRsvpOpen = ref(false)
 const shareUrl = window.location.origin + '#fotos'
 </script>
 
@@ -58,6 +61,8 @@ const shareUrl = window.location.origin + '#fotos'
   <BaseModal v-model:open="isPhotosOpen" title="Subir fotos" icon="camera">
     <PhotoUploadForm />
   </BaseModal>
+
+  <BaseModal v-model:open="isRsvpOpen" title="Confirmar asistencia" icon="clipboard"> <RsvpForm /> </BaseModal>
 
   <main class="overflow-x-clip">
     <HeroHeader :couple="couple" :background-image-url="heroImage" next-section-id="fecha" />
@@ -133,6 +138,22 @@ const shareUrl = window.location.origin + '#fotos'
         </button>
       </div>
       <FloralBorder class="absolute inset-x-0 bottom-0 translate-y-1/2" />
+    </section>
+
+    <section
+      id="confirmacion"
+      class="bg-wedding-bg pt-[calc(4rem+min(11.65vw,80px))] pb-16 px-4 text-center"
+      aria-label="Confirmar asistencia"
+    >
+      <SectionTitle title="Confirmación de asistencia" />
+      <LineIcon name="clipboard" class="mx-auto mt-6 h-16 w-16 text-wedding-olive"></LineIcon>
+      <button
+        type="button"
+        @click="isRsvpOpen = true"
+        class="inline-flex min-w-56 items-center justify-center rounded-lg bg-wedding-ink px-8 py-3 text-lg text-wedding-cream shadow-sm transition hover:bg-wedding-ink/90 mt-8"
+      >
+        Confirmar asistencia
+      </button>
     </section>
   </main>
 </template>

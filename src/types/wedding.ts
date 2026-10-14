@@ -53,3 +53,16 @@ export interface Poem {
   author: string
   pages: string[]
 }
+
+export type DietType = 'none' | 'vegetarian' | 'vegan'
+
+export type AgeGroup = 'adult' | 'child'
+
+export interface Guest {
+  id: string
+  name: string
+  ageGroup: AgeGroup
+  diet: DietType
+  hasAllergies: boolean | null // null = aún no ha contestado · false = ninguna · true = ver `allergies`
+  allergies: string
+}
