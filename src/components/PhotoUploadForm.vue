@@ -30,6 +30,11 @@ function handleFilesChange(event: Event): void {
     sizeMessage.value = null
   }
 }
+
+function removeMedia(media: SelectedMedia): void {
+  URL.revokeObjectURL(media.previewUrl)
+  selectedMedia.value = selectedMedia.value.filter((item) => item.id !== media.id)
+}
 </script>
 
 <template>
@@ -46,7 +51,7 @@ function handleFilesChange(event: Event): void {
     </p>
     <p v-if="sizeMessage">{{ sizeMessage }}</p>
     <ul v-if="selectedMedia.length >= 1" class="grid grid-cols-3 gap-2">
-      <li v-for="media in selectedMedia" :key="media.id">
+      <li v-for="(media, index) in selectedMedia" :key="media.id" class="relative">
         <video
           v-if="media.file.type.startsWith('video/')"
           :src="`${media.previewUrl}#t=0.1`"
@@ -56,6 +61,14 @@ function handleFilesChange(event: Event): void {
           preload="metadata"
         ></video>
         <img v-else :src="media.previewUrl" alt="" class="aspect-square w-full object-cover rounded-md" />
+        <button
+          type="button"
+          class="absolute top-1 right-1 rounded-full bg-black/60 p-2 text-white"
+          :aria-label="`Quitar archivo ${index + 1}`"
+          @click="removeMedia(media)"
+        >
+          <LineIcon name="close" class="size-5" />
+        </button>
       </li>
     </ul>
   </form>
