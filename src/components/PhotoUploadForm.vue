@@ -11,6 +11,7 @@ interface SelectedMedia {
 const selectedMedia = ref<SelectedMedia[]>([])
 const MAX_FILE_SIZE = 50 * 1024 * 1024 //50MB
 const sizeMessage = ref<string | null>(null)
+const status = ref<'idle' | 'sending' | 'sent'>('idle')
 
 function handleFilesChange(event: Event): void {
   const input = event.target as HTMLInputElement
@@ -35,10 +36,29 @@ function removeMedia(media: SelectedMedia): void {
   URL.revokeObjectURL(media.previewUrl)
   selectedMedia.value = selectedMedia.value.filter((item) => item.id !== media.id)
 }
+
+async function handleSubmit(): Promise<void> {
+  status.value = 'sending'
+  await new Promise((resolve) => setTimeout(resolve, 1000))
+  status.value = 'sent'
+}
+
+function sendMoreMedia(): void {
+  selectedMedia.value.forEach((media) => URL.revokeObjectURL(media.previewUrl))
+  selectedMedia.value = []
+  sizeMessage.value = null
+  status.value = 'idle'
+}
 </script>
 
 <template>
-  <form @submit.prevent class="text-center space-y-4">
+  <div v-if="status === 'sent'" class="text-center">
+    <p class="text-xl">¡Gracias por compartir estos momentos! 📸</p>
+    <button type="button" @click="sendMoreMedia" class="mt-6 text-wedding-ink underline underline-offset-4">
+      Enviar más fotos
+    </button>
+  </div>
+  <form v-else @submit.prevent="handleSubmit" class="space-y-4 text-center">
     <label
       class="inline-flex gap-2 min-w-56 items-center justify-center rounded-lg bg-wedding-ink px-8 py-3 text-lg text-wedding-cream shadow-sm transition hover:bg-wedding-ink/90 cursor-pointer has-focus-visible:ring-offset-2 has-focus-visible:ring-2 has-focus-visible:ring-wedding-gold"
     >
@@ -71,5 +91,12 @@ function removeMedia(media: SelectedMedia): void {
         </button>
       </li>
     </ul>
+    <button
+      type="submit"
+      class="inline-flex min-w-56 items-center justify-center rounded-lg bg-wedding-ink px-8 py-3 text-lg text-wedding-cream shadow-sm transition hover:bg-wedding-ink/90 disabled:cursor-not-allowed disabled:opacity-60"
+      :disabled="status === 'sending' || selectedMedia.length === 0"
+    >
+      {{ status === 'sending' ? 'Enviando...' : 'Enviar' }}
+    </button>
   </form>
 </template>
