@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import type { Guest } from '../types/wedding'
+import LineIcon from './ui/LineIcon.vue'
 
 const attendance = ref<'yes' | 'no' | null>(null)
 
@@ -28,19 +29,133 @@ function removeGuest(guest: Guest): void {
 
 <template>
   <form @submit.prevent class="space-y-6 text-center">
+    <!-- 1. PREGUNTA: ¿vendréis? -->
     <fieldset class="flex flex-wrap justify-center gap-3">
-      <legend class="w-full">¿Vendréis a la boda?</legend>
+      <legend class="mb-3 w-full">¿Vendréis a la boda?</legend>
       <label
         class="border border-wedding-ink has-checked:bg-wedding-ink has-checked:text-wedding-cream cursor-pointer rounded-lg px-6 py-3 has-focus-visible:ring-2 has-focus-visible:ring-wedding-gold has-focus-visible:ring-offset-2"
-        ><input v-model="attendance" type="radio" value="yes" required class="sr-only" />¡Sí, allí estaremos!
-      </label>
-      <label
-        class="border border-wedding-ink has-checked:bg-wedding-ink has-checked:text-wedding-cream cursor-pointer rounded-lg px-6 py-3 has-focus-visible:ring-2 has-focus-visible:ring-wedding-gold has-focus-visible:ring-offset-2"
+        ><input v-model="attendance" type="radio" value="yes" required class="sr-only" />¡Sí, allí estaremos!</label
       >
-        <input v-model="attendance" type="radio" class="sr-only" value="no" />No podremos ir 😔
-      </label>
+      <label
+        class="border border-wedding-ink has-checked:bg-wedding-ink has-checked:text-wedding-cream cursor-pointer rounded-lg px-6 py-3 has-focus-visible:ring-2 has-focus-visible:ring-wedding-gold has-focus-visible:ring-offset-2"
+        ><input v-model="attendance" type="radio" class="sr-only" value="no" />No podremos ir 😔</label
+      >
     </fieldset>
-    <p v-if="attendance === 'yes'">Aquí irán las fichas</p>
+
+    <!-- 2. SI DICE QUE SÍ: una ficha por persona -->
+    <div v-if="attendance === 'yes'" class="space-y-4">
+      <fieldset
+        v-for="(guest, index) in guests"
+        :key="guest.id"
+        class="space-y-4 rounded-xl border border-wedding-gold/40 p-4 relative"
+      >
+        <legend class="px-2">Persona {{ index + 1 }}</legend>
+
+        <button
+          type="button"
+          @click="removeGuest(guest)"
+          :aria-label="`Quitar persona ${index + 1}`"
+          class="absolute top-2 right-2 rounded-full bg-wedding-gold-bright p-1.5 text-wedding-cream"
+          v-if="guests.length > 1"
+        >
+          <LineIcon name="close" class="size-4" />
+        </button>
+
+        <!-- 2a. Nombre -->
+        <div>
+          <input
+            :id="`guest-name-${guest.id}`"
+            v-model="guest.name"
+            required
+            class="w-full border-0 border-b border-wedding-ink/40 bg-transparent px-1 py-2 text-center text-lg focus:border-wedding-ink focus:outline-none"
+          />
+          <label :for="`guest-name-${guest.id}`" class="mt-1 block text-sm text-wedding-olive">Nombre</label>
+        </div>
+
+        <!-- 2b. ¿Adulto o niño? -->
+        <fieldset class="flex justify-center gap-3">
+          <legend class="mb-2 w-full text-sm text-wedding-olive">¿Adulto o niño?</legend>
+          <label
+            class="border border-wedding-ink has-checked:bg-wedding-ink has-checked:text-wedding-cream cursor-pointer rounded-lg px-4 py-2 text-base has-focus-visible:ring-2 has-focus-visible:ring-wedding-gold has-focus-visible:ring-offset-2"
+            ><input
+              v-model="guest.ageGroup"
+              type="radio"
+              :name="`age-${guest.id}`"
+              value="adult"
+              class="sr-only"
+            />Adulto</label
+          >
+          <label
+            class="border border-wedding-ink has-checked:bg-wedding-ink has-checked:text-wedding-cream cursor-pointer rounded-lg px-4 py-2 text-base has-focus-visible:ring-2 has-focus-visible:ring-wedding-gold has-focus-visible:ring-offset-2"
+            ><input
+              v-model="guest.ageGroup"
+              type="radio"
+              :name="`age-${guest.id}`"
+              value="child"
+              class="sr-only"
+            />Niño</label
+          >
+        </fieldset>
+
+        <!-- 2c. Menú -->
+        <div>
+          <label :for="`diet-${guest.id}`" class="mb-1 block text-sm text-wedding-olive">Menú</label>
+          <select
+            :id="`diet-${guest.id}`"
+            v-model="guest.diet"
+            class="w-full rounded-lg border border-wedding-ink/40 bg-transparent px-3 py-2"
+          >
+            <option value="none">Sin restricciones</option>
+            <option value="vegetarian">Vegetariana</option>
+            <option value="vegan">Vegana</option>
+          </select>
+        </div>
+
+        <!-- 2d. ¿Alergias? -->
+        <fieldset class="flex justify-center gap-3">
+          <legend class="mb-2 w-full text-sm text-wedding-olive">¿Alergias o intolerancias?</legend>
+          <label
+            class="border border-wedding-ink has-checked:bg-wedding-ink has-checked:text-wedding-cream cursor-pointer rounded-lg px-4 py-2 text-base has-focus-visible:ring-2 has-focus-visible:ring-wedding-gold has-focus-visible:ring-offset-2"
+            ><input
+              v-model="guest.hasAllergies"
+              type="radio"
+              :name="`allergies-${guest.id}`"
+              :value="false"
+              required
+              class="sr-only"
+            />Ninguna</label
+          >
+          <label
+            class="border border-wedding-ink has-checked:bg-wedding-ink has-checked:text-wedding-cream cursor-pointer rounded-lg px-4 py-2 text-base has-focus-visible:ring-2 has-focus-visible:ring-wedding-gold has-focus-visible:ring-offset-2"
+            ><input
+              v-model="guest.hasAllergies"
+              type="radio"
+              :name="`allergies-${guest.id}`"
+              :value="true"
+              class="sr-only"
+            />Sí</label
+          >
+        </fieldset>
+
+        <!-- 2e. ¿Cuáles? -->
+        <div v-if="guest.hasAllergies === true">
+          <input
+            :id="`allergies-${guest.id}`"
+            v-model="guest.allergies"
+            required
+            class="w-full border-0 border-b border-wedding-ink/40 bg-transparent px-1 py-2 text-center text-lg focus:border-wedding-ink focus:outline-none"
+          />
+          <label :for="`allergies-${guest.id}`" class="mt-1 block text-sm text-wedding-olive"
+            >¿Cuáles? (ej. frutos secos, lactosa, celiaquía)</label
+          >
+        </div>
+      </fieldset>
+      <button type="button" @click="addGuest" class="text-wedding-ink underline underline-offset-4">
+        + Añadir otra persona
+      </button>
+    </div>
+
+    <!-- 3. SI DICE QUE NO -->
     <p v-else-if="attendance === 'no'">Aquí irá el mensaje</p>
   </form>
 </template>

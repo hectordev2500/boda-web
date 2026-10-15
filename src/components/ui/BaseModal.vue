@@ -25,12 +25,12 @@ function handleBackdropClick(event: MouseEvent): void {
 
 <template>
   <dialog
-    class="m-auto bg-transparent p-0 backdrop:bg-black/70 overflow-visible"
+    class="m-0 h-dvh max-h-none w-full max-w-none flex-col overflow-y-auto bg-transparent px-4 pt-14 pb-4 backdrop:bg-black/70 open:flex"
     ref="dialogRef"
     @close="handleClose"
     @click="handleBackdropClick"
   >
-    <div class="relative mt-12 w-[calc(100vw-2rem)] max-w-md rounded-2xl bg-wedding-cream p-3 pt-14 shadow-2xl">
+    <div class="relative m-auto w-full max-w-md rounded-2xl bg-wedding-cream p-3 pt-14 shadow-2xl">
       <!-- círculo con el icono -->
       <div
         class="absolute top-0 left-1/2 flex size-24 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-md"
