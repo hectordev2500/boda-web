@@ -17,6 +17,9 @@ function createGuest(): Guest {
 }
 
 const guests = ref<Guest[]>([createGuest()])
+const declinedNames = ref('')
+const message = ref('')
+const hasConsent = ref(false)
 
 function addGuest(): void {
   guests.value = [...guests.value, createGuest()]
@@ -156,6 +159,45 @@ function removeGuest(guest: Guest): void {
     </div>
 
     <!-- 3. SI DICE QUE NO -->
-    <p v-else-if="attendance === 'no'">Aquí irá el mensaje</p>
+    <div v-else-if="attendance === 'no'">
+      <input
+        type="text"
+        v-model="declinedNames"
+        required
+        id="rsvp-declined-names"
+        class="w-full border-0 border-b border-wedding-ink/40 bg-transparent px-1 py-2 text-center text-lg focus:border-wedding-ink focus:outline-none"
+      />
+      <label for="rsvp-declined-names" class="mt-1 block text-sm text-wedding-olive">¿Quién no podrá venir?</label>
+    </div>
+
+    <!-- 4. FINAL (sí o no): mensaje, consentimiento solo si vienen, y enviar -->
+    <div v-if="attendance !== null" class="space-y-4">
+      <div>
+        <textarea
+          id="rsvp-message"
+          v-model="message"
+          rows="3"
+          class="w-full rounded-lg border border-wedding-ink/40 bg-transparent px-3 py-2"
+        ></textarea>
+        <label for="rsvp-message" class="mt-1 block text-sm text-wedding-olive"
+          >Mensaje para los novios (opcional)</label
+        >
+      </div>
+
+      <label v-if="attendance === 'yes'" class="flex items-start gap-3 text-left text-sm accent-wedding-ink">
+        <input v-model="hasConsent" type="checkbox" required class="mt-1 size-5" />
+        <span
+          >Acepto que los novios guarden estos datos (incluidas las alergias) solo para organizar la boda. Se borrarán
+          después del evento.</span
+        >
+      </label>
+
+      <button
+        type="submit"
+        class="inline-flex min-w-56 items-center justify-center rounded-lg bg-wedding-ink px-8 py-3 text-lg text-wedding-cream shadow-sm transition hover:bg-wedding-ink/90"
+      >
+        Enviar confirmación
+      </button>
+    </div>
   </form>
 </template>
