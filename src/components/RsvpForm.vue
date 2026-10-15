@@ -20,6 +20,7 @@ const guests = ref<Guest[]>([createGuest()])
 const declinedNames = ref('')
 const message = ref('')
 const hasConsent = ref(false)
+const status = ref<'idle' | 'sending' | 'sent'>('idle')
 
 function addGuest(): void {
   guests.value = [...guests.value, createGuest()]
@@ -28,10 +29,36 @@ function addGuest(): void {
 function removeGuest(guest: Guest): void {
   guests.value = guests.value.filter((item) => item.id !== guest.id)
 }
+
+async function handleSubmit(): Promise<void> {
+  status.value = 'sending'
+  await new Promise((resolve) => setTimeout(resolve, 1000))
+  status.value = 'sent'
+}
+
+function confirmAnotherGroup(): void {
+  guests.value = [createGuest()]
+  attendance.value = null
+  hasConsent.value = false
+  message.value = ''
+  declinedNames.value = ''
+  status.value = 'idle'
+}
 </script>
 
 <template>
-  <form @submit.prevent class="space-y-6 text-center">
+  <div v-if="status === 'sent'" class="space-y-6 text-center">
+    <p v-if="attendance === 'yes'" class="text-xl">
+      ¡Genial! Hemos apuntado a {{ guests.length }} {{ guests.length === 1 ? 'persona' : 'personas' }} 🎉
+    </p>
+    <p v-else class="text-xl">¡Gracias por avisarnos! Os echaremos de menos 💛</p>
+
+    <button type="button" @click="confirmAnotherGroup" class="text-wedding-ink underline underline-offset-4">
+      Confirmar otro grupo
+    </button>
+  </div>
+
+  <form v-else @submit.prevent="handleSubmit" class="space-y-6 text-center">
     <!-- 1. PREGUNTA: ¿vendréis? -->
     <fieldset class="flex flex-wrap justify-center gap-3">
       <legend class="mb-3 w-full">¿Vendréis a la boda?</legend>
@@ -193,10 +220,11 @@ function removeGuest(guest: Guest): void {
       </label>
 
       <button
+        :disabled="status === 'sending'"
         type="submit"
-        class="inline-flex min-w-56 items-center justify-center rounded-lg bg-wedding-ink px-8 py-3 text-lg text-wedding-cream shadow-sm transition hover:bg-wedding-ink/90"
+        class="inline-flex min-w-56 items-center justify-center rounded-lg bg-wedding-ink px-8 py-3 text-lg text-wedding-cream shadow-sm transition hover:bg-wedding-ink/90 disabled:cursor-not-allowed disabled:opacity-60"
       >
-        Enviar confirmación
+        {{ status === 'sending' ? 'Enviando…' : 'Enviar confirmación' }}
       </button>
     </div>
   </form>
