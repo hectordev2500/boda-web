@@ -15,6 +15,7 @@ import PoemBook from './components/PoemBook.vue'
 import SectionTitle from './components/ui/SectionTitle.vue'
 import QrCode from './components/QrCode.vue'
 import RsvpForm from './components/RsvpForm.vue'
+import SiteFooter from './components/SiteFooter.vue'
 import LineIcon from './components/ui/LineIcon.vue'
 
 const isTipsOpen = ref(false)
@@ -142,7 +143,7 @@ const shareUrl = window.location.origin + '#fotos'
 
     <section
       id="confirmacion"
-      class="bg-wedding-bg pt-[calc(4rem+min(11.65vw,80px))] pb-16 px-4 text-center"
+      class="bg-wedding-bg px-4 pt-[calc(4rem+min(11.65vw,80px))] pb-[calc(4rem+min(11.65vw,80px))] text-center"
       aria-label="Confirmar asistencia"
     >
       <SectionTitle title="Confirmación de asistencia" />
@@ -155,5 +156,7 @@ const shareUrl = window.location.origin + '#fotos'
         Confirmar asistencia
       </button>
     </section>
+
+    <SiteFooter :couple="couple" />
   </main>
 </template>
