@@ -1,13 +1,18 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
+import { supabase } from '../lib/supabase'
 
 const form = reactive({ guestName: '', song: '', youtubeUrl: '' })
-const status = ref<'idle' | 'sending' | 'sent'>('idle')
+const status = ref<'idle' | 'sending' | 'sent' | 'error'>('idle')
 
 async function handleSubmit(): Promise<void> {
   status.value = 'sending'
-  await new Promise((resolve) => setTimeout(resolve, 1000))
-  status.value = 'sent'
+  const { error } = await supabase.from('song_suggestions').insert({
+    guest_name: form.guestName,
+    song: form.song,
+    youtube_url: form.youtubeUrl || null,
+  })
+  status.value = error ? 'error' : 'sent'
 }
 
 function sendAnotherSong(): void {
@@ -58,6 +63,9 @@ function sendAnotherSong(): void {
       >
     </div>
     <div class="pt-2 text-center">
+      <p v-if="status === 'error'" class="mb-3 text-sm text-red-700">
+        No se ha podido enviar. Revisa tu conexión e inténtalo de nuevo.
+      </p>
       <button
         :disabled="status === 'sending'"
         type="submit"
