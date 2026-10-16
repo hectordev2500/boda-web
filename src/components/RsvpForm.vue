@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import type { Guest } from '../types/wedding'
 import LineIcon from './ui/LineIcon.vue'
+import { supabase } from '../lib/supabase'
 
 const attendance = ref<'yes' | 'no' | null>(null)
 
@@ -20,7 +21,7 @@ const guests = ref<Guest[]>([createGuest()])
 const declinedNames = ref('')
 const message = ref('')
 const hasConsent = ref(false)
-const status = ref<'idle' | 'sending' | 'sent'>('idle')
+const status = ref<'idle' | 'sending' | 'sent' | 'error'>('idle')
 
 function addGuest(): void {
   guests.value = [...guests.value, createGuest()]
@@ -32,8 +33,36 @@ function removeGuest(guest: Guest): void {
 
 async function handleSubmit(): Promise<void> {
   status.value = 'sending'
-  await new Promise((resolve) => setTimeout(resolve, 1000))
-  status.value = 'sent'
+  const groupId = crypto.randomUUID()
+
+  // 1. El grupo (siempre: digan sí o no)
+  const { error: groupError } = await supabase.from('rsvp_groups').insert({
+    id: groupId,
+    attendance: attendance.value,
+    declined_names: attendance.value === 'no' ? declinedNames.value : null,
+    message: message.value || null,
+    has_consent: hasConsent.value,
+  })
+  if (groupError) {
+    status.value = 'error'
+    return
+  }
+  // 2. Si dicen que no, no hay personas: hemos terminado
+  if (attendance.value === 'no') {
+    status.value = 'sent'
+    return
+  }
+  const { error: guestsError } = await supabase.from('rsvp_guests').insert(
+    guests.value.map((guest) => ({
+      group_id: groupId,
+      name: guest.name,
+      age_group: guest.ageGroup,
+      diet: guest.diet,
+      has_allergies: guest.hasAllergies,
+      allergies: guest.hasAllergies ? guest.allergies : '',
+    })),
+  )
+  status.value = guestsError ? 'error' : 'sent'
 }
 
 function confirmAnotherGroup(): void {
@@ -218,7 +247,9 @@ function confirmAnotherGroup(): void {
           después del evento.</span
         >
       </label>
-
+      <p v-if="status === 'error'" class="mb-3 text-sm text-red-700">
+        No se ha podido enviar. Revisa tu conexión e inténtalo de nuevo.
+      </p>
       <button
         :disabled="status === 'sending'"
         type="submit"
