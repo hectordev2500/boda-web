@@ -12,6 +12,8 @@ let lastWidth = 0
 function setScreenHeight(): void {
   lastWidth = window.innerWidth
   document.documentElement.style.setProperty('--screen-height', `${window.innerHeight}px`)
+  // Para la variante short: de Tailwind (ver style.css): textos del hero algo más pequeños en pantallas bajas.
+  document.documentElement.classList.toggle('short-screen', window.innerHeight <= 720)
 }
 
 setScreenHeight()

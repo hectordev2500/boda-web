@@ -19,8 +19,12 @@
   --font-script: 'Pinyon Script', cursive;
 }
 
-/* Pantallas bajas (iPhone SE, portátiles con poca altura). */
-@custom-variant short (@media (max-height: 720px));
+/*
+  Pantallas bajas (iPhone SE, portátiles con poca altura): main.ts añade la clase .short-screen al <html>
+  si la pantalla mide 720px de alto o menos. No se usa @media (max-height) porque en algunos navegadores
+  (Opera en iPhone) el alto cambia al esconder la barra y los textos del hero crecían y encogían al deslizar.
+*/
+@custom-variant short (&:where(.short-screen, .short-screen *));
 
 @layer base {
   html {
