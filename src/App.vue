@@ -27,9 +27,13 @@ const shareUrl = window.location.origin + '#fotos'
 </script>
 
 <template>
-  <!-- Foto fija de fondo: las secciones transparentes la dejan ver (efecto parallax). -->
+  <!--
+    Foto fija de fondo: las secciones transparentes la dejan ver (efecto parallax).
+    Alto fijo en px (--screen-height, ver main.ts) para que no se reescale cuando la barra del navegador
+    aparece o se esconde, y 10rem de margen arriba y abajo para que siempre cubra la pantalla.
+  -->
   <div
-    class="fixed inset-x-0 top-0 -z-10 h-lvh transform-gpu bg-cover bg-center"
+    class="fixed inset-x-0 -top-40 -z-10 h-[calc(var(--screen-height)+20rem)] transform-gpu bg-cover bg-center"
     :style="{ backgroundImage: `url(${heroImage})` }"
     aria-hidden="true"
   ></div>
